@@ -1,56 +1,67 @@
-var provider = new firebase.auth.GoogleAuthProvider(); 
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCmj08LcW2dT_bGaFPFqNcnoID7ZRqzQJw",
+    authDomain: "knowbeforugo.firebaseapp.com",
+    databaseURL: "https://knowbeforugo.firebaseio.com",
+    projectId: "knowbeforugo",
+    storageBucket: "knowbeforugo.appspot.com",
+    messagingSenderId: "172400475054"
+};
+firebase.initializeApp(config);
+
+var provider = new firebase.auth.GoogleAuthProvider();
 var user;
 
-$(document).ready(function(){
-    $("#btnSignOut").hide(); 
+$(document).ready(function () {
+    $("#btnSignOut").hide();
     $("#user-name").html("Sign In to Begin")
 })
 
 
 function signIn() {
     firebase.auth().signInWithPopup(provider).then(function (result) {
-        var token = result.credential.accessToken; 
-        user = result.user; 
+        var token = result.credential.accessToken;
+        user = result.user;
         showWelcome();
-        
-    }).catch(function (error) {          
+
+    }).catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;
         var email = error.email;
-        var credential = error.credential;    
-    }); 
-};   
+        var credential = error.credential;
+    });
+};
 
 
-function signOut(){
-    firebase.auth().signOut().then(function() {
+function signOut() {
+    firebase.auth().signOut().then(function () {
         showGoodBye();
-      }).catch(function(error) {
+    }).catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;
         var email = error.email;
-        var credential = error.credential;  
-      });
+        var credential = error.credential;
+    });
 }
 
-function showWelcome(){
-    $("#btnSignOut").show(); 
+function showWelcome() {
+    $("#btnSignOut").show();
     $("#btnSignIn").hide();
     $("#user-name").html("Welcome " + user.displayName);
-} 
+}
 
-function showGoodBye(){ 
-    $("#btnSignIn").show(); 
-    $("#btnSignOut").hide(); 
+function showGoodBye() {
+    $("#btnSignIn").show();
+    $("#btnSignOut").hide();
     $("#user-name").html("Sign In to Begin");
 }
 
 //Handle Account Status
 firebase.auth().onAuthStateChanged(user => {
-    if(user) {
-      window.location = 'index.html'; //After successful login, user will be redirected to home.html
+    if (user) {
+        window.location = 'index.html'; //After successful login, user will be redirected to home.html
     }
-  });
+});
 
 
 // // NOT USING RIGHT NOW
