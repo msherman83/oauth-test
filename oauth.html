@@ -11,15 +11,48 @@
 
 <body>
 
-    <form>
-        <button id="btnSignIn" class="btn btn-primary">Sign In with Google</button>
+
+    <div class="text-center">
+        <button id="btnSignIn" class="btn btn-primary" onclick="signIn()">
+            <i class="fa fa-google-plus"></i>Sign In with Google</button>
+    </div>
+
+    <div class="text-center" id="welcome">
+        <h2 class="text-center" id="user-name"></h2>
+        <button id="btnSignOut" class="btn btn-primary" onclick="signOut()">Sign Out</button>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCmj08LcW2dT_bGaFPFqNcnoID7ZRqzQJw",
+            authDomain: "knowbeforugo.firebaseapp.com",
+            databaseURL: "https://knowbeforugo.firebaseio.com",
+            projectId: "knowbeforugo",
+            storageBucket: "knowbeforugo.appspot.com",
+            messagingSenderId: "172400475054"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="oauth.js"></script>
+
+</body>
+
+</html>
+
+<!-- <form>
+        <button id="btnSignIn" class="btn btn-primary" onclick="signIn()">Sign In with Google</button>
     </form>
 
 
     <!-- <script src="./assets/javascript/oauth.js"></script> -->
 
-    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-auth.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
     <script>
         // Initialize Firebase
         var config = {
@@ -33,45 +66,34 @@
         firebase.initializeApp(config);
     </script>
 
-    <!-- was in a tutorial and on the older support docs to recognize google accounts -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
     <script>
 
         var provider = new firebase.auth.GoogleAuthProvider();
+        var user;
 
-        $(function () {
+        // on click a google sign in box should popup.
 
-            // on click a google sign in box should popup.
-            $("#btnSignIn").on("click", function () {
 
-                // confirm button is clicking
-                console.log("button works");
+        function signIn() {
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                var token = result.credential.accessToken;
+                user = result.user;
+                showWelcome();
 
-                firebase.auth().signInWithPopup(provider).then(function (result) {
-                    // This gives you a Google Access Token. You can use it to access the Google API.
-                    var token = result.credential.accessToken;
-                    // The signed-in user info.
-                    var user = result.user;
-                    console.log(user);
-                    // ...
-                }).catch(function (error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // The email of the user's account used.
-                    var email = error.email;
-                    // The firebase.auth.AuthCredential type that was used.
-                    var credential = error.credential;
-                    // ...
-                });
+            }).catch(function (error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                var email = error.email;
+                var credential = error.credential;
             });
-        });
+        };
+
 
     </script>
 
 </body>
 
-</html>
+</html> -->
