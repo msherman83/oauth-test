@@ -32,11 +32,32 @@
 		<button id="btnSignOut" class="btn btn-primary" onclick="signOut()">Sign Out</button>
 	</div>
 
+	<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
 
-	<script src="http://code.jquery.com/jquery-2.1.0.js"></script>
-	<script src="javascript/forecast.js"></script>
-	<script src="javascript/tugoAPI.js"></script>
-	<script src="oauth.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCmj08LcW2dT_bGaFPFqNcnoID7ZRqzQJw",
+			authDomain: "knowbeforugo.firebaseapp.com",
+			databaseURL: "https://knowbeforugo.firebaseio.com",
+			projectId: "knowbeforugo",
+			storageBucket: "knowbeforugo.appspot.com",
+			messagingSenderId: "172400475054"
+		};
+		firebase.initializeApp(config);
+	</script>
+	
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="oauth.js"></script>
+
+</body>
+
+<script src="http://code.jquery.com/jquery-2.1.0.js"></script>
+<script src="javascript/forecast.js"></script>
+<script src="javascript/tugoAPI.js"></script>
+<script src="oauth.js"></script>
 
 </body>
 
